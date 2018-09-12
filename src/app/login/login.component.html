@@ -1,0 +1,25 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/images.png" width="150px" class="user-avatar" />
+            <h1> {{title}} </h1>
+            <form>
+                    <div class="{{classname}}"  [hidden]="!submitted" >
+                        {{alert}}
+                    </div>
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="email" #email name="email" class="form-control input-underline input-lg" id="" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" #password name="password"  class="form-control input-underline input-lg" id="" placeholder="Password">
+                    </div>
+                </div>
+                <a class="btn rounded-btn" (click)="onLoggedin(email.value,password.value)"> Log in </a>
+                
+                <!-- <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a> -->
+            </form>
+        </div>
+    </div>
+</div>

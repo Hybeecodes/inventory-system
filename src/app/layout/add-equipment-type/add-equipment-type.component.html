@@ -1,0 +1,20 @@
+<div [@routerTransition]>
+        <!-- <app-page-header [heading]="'Forms'" [icon]="'fa-edit'"></app-page-header> -->
+    
+        <div class="row">
+            <h1>Add New Equipment Type</h1>  
+            <div class="col-lg-12">
+                <form>
+                    <fieldset class="form-group">
+                        <label>Type Name</label>
+                        <input class="form-control" name="typeName" #typeName placeholder="Type Name">
+                    </fieldset>
+                    <a class="btn btn-secondary" (click)="addEquipmentType(typeName.value)" >Add Equipment Type</a>
+    
+                </form>
+    
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    
