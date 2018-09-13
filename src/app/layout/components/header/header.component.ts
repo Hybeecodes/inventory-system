@@ -10,7 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
     title: string = 'Nacoss Inventory Management System';
-    user:any;
+    user_firstname='';
+    user_lastname ='';
 
     constructor(private translate: TranslateService, public router: Router) {
 
@@ -31,8 +32,9 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user = JSON.parse(localStorage.getItem('user'));
-        console.log(this.user);
+        this.user_firstname = localStorage.getItem('user_firstname');
+        this.user_lastname = localStorage.getItem('user_lastname');
+        console.log(this.user_firstname)
     }
 
     isToggled(): boolean {
@@ -51,7 +53,9 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user_firstname');
+        localStorage.removeItem('user_lastname');
     }
 
     changeLang(language: string) {

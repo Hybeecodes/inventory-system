@@ -92,7 +92,7 @@ router.get('/equipmentCount',(req,res)=>{
 });
 
 router.get('/equipments',(req,res,next)=>{
-    Equipment.find({},{}).populate('typeId','typeName').exec((err,equipments)=>{
+    Equipment.find({},{}).populate('typeId','typeName',EquipmentType).exec((err,equipments)=>{
         if(err){
             res.status(500).json({status:0,message:"Sorry, error fetching data"});
         }
@@ -213,6 +213,7 @@ router.post('/office',(req,res,next)=>{
         name: req.body.name,
         managerId: req.body.managerId
     };
+    console.log(newOffice);
     Office.create(newOffice).then((office)=>{
         res.status(201).json({status:1,message:office});
     }).catch((err)=>{
@@ -231,7 +232,7 @@ router.get('/officeCount',(req,res)=>{
 });
 
 router.get('/offices',(req,res,next)=>{
-    Office.find({},{}).populate('managerId','firstname').exec((err,offices)=>{
+    Office.find({},{}).populate('managerId','firstname',User).exec((err,offices)=>{
         if(err){
             res.status(500).json({status:0,message:err});
         }
@@ -264,13 +265,23 @@ router.delete('/deleteOffice',(req,res,next)=>{
 });
 
 router.post('/allocateEquipment',(req,res)=>{
-    const equimentId = req.body.equimentId;
+    const equipmentId = req.body.equipmentId;
     const officeId = req.body.officeId;
-    Allocation.create({equimentId:equimentId,officeId:officeId},(err,result)=>{
+    Allocation.create({equipmentId:equipmentId,officeId:officeId},(err,result)=>{
         if(err){
             res.status(500).json({status:0,message:err});
         }else{
             res.status(201).json({status:1,message:result});
+        }
+    })
+})
+
+router.get('/allocations',(req,res)=>{
+    Allocation.find({},{}).populate('equipmentId','name',Equipment).populate('officeId','name',Office).exec((err,allocations)=>{
+        if(err){
+            res.status(500).json({status:0,message:err});
+        }else{
+            res.status(200).json({status:1,message:allocations});
         }
     })
 })

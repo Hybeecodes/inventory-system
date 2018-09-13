@@ -115,12 +115,15 @@ var LoginComponent = /** @class */ (function () {
             email: email,
             password: password
         };
-        console.log(post_data);
+        //   console.log(post_data);
         this.api.postData(post_data, '/login').then(function (res) {
             if (res['status'] == 1) {
-                localStorage.setItem('isLoggedin', 'true');
                 localStorage.setItem('token', res['token']);
-                localStorage.setItem('user', JSON.stringify(res['message']));
+                var user = res['message']['0'];
+                // console.log(user['0'])
+                localStorage.setItem('user_firstname', user['firstname']);
+                localStorage.setItem('user_lastname', user['lastname']);
+                // console.log(localStorage.getItem('user'));
                 _this.router.navigateByUrl('dashboard');
             }
             else {

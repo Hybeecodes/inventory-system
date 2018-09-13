@@ -20,7 +20,7 @@
                                 <tr *ngFor="let office of offices; let i= index" >
                                     <th scope="row">{{i+1}}</th>
                                     <td>{{office.name}}</td>
-                                    <!-- <td>{{type.condition}}</td> -->
+                                    <td>{{office.managerId.firstname}}</td>
                                 </tr>
                                 
                                 </tbody>

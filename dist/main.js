@@ -344,7 +344,7 @@ var AuthGuard = /** @class */ (function () {
         this.router = router;
     }
     AuthGuard.prototype.canActivate = function () {
-        if (localStorage.getItem('isLoggedin')) {
+        if (localStorage.getItem('token')) {
             return true;
         }
         this.router.navigate(['/login']);

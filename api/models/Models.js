@@ -70,12 +70,12 @@ AllocationSchema = new Schema({
     equipmentId:{
         type:Schema.Types.ObjectId,
         required:true,
-        rer: 'Equipment'
+        ref: 'Equipment'
     },
     officeId:{
         type:Schema.Types.ObjectId,
         required:true,
-        rer: 'Office'
+        ref: 'Office'
     },
     allocation_time:{
         type:Date,
