@@ -12,14 +12,15 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Type Name</th>
+                                    <th>Equipment Name</th>
+                                    <th>Condition</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let type of equipmentTypes; let i= index" >
+                                <tr *ngFor="let type of equipments; let i= index" >
                                     <th scope="row">{{i+1}}</th>
-                                    <td>{{type.typeName}}</td>
-                                 
+                                    <td>{{type.name}}</td>
+                                    <td>{{type.condition}}</td>
                                 </tr>
                                 
                                 </tbody>

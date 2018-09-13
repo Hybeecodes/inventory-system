@@ -51,7 +51,7 @@ var EquipmentTypesRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [@routerTransition]>\n    <!-- <app-page-header [heading]=\"'Tables'\" [icon]=\"'fa-table'\"></app-page-header> -->\n    <div class=\"row\">\n        <h1>Equipment Types</h1>\n            <div class=\"col col-xl-12 col-lg-12\">\n                    <div class=\"card mb-3\">\n                        <div class=\"card-header\">\n                            Equipment Types\n                        </div>\n                        <div class=\"card-body table-responsive\">\n                            <table class=\"table\">\n                                <thead>\n                                <tr>\n                                    <th>#</th>\n                                    <th>First Name</th>\n                                    <th>Last Name</th>\n                                    <th>Username</th>\n                                </tr>\n                                </thead>\n                                <tbody>\n                                <tr>\n                                    <th scope=\"row\">1</th>\n                                    <td>Mark</td>\n                                    <td>Otto</td>\n                                    <td>@mdo</td>\n                                </tr>\n                                <tr>\n                                    <th scope=\"row\">2</th>\n                                    <td>Jacob</td>\n                                    <td>Thornton</td>\n                                    <td>@fat</td>\n                                </tr>\n                                <tr>\n                                    <th scope=\"row\">3</th>\n                                    <td>Larry</td>\n                                    <td>the Bird</td>\n                                    <td>@twitter</td>\n                                </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                    \n                </div>\n    </div>\n\n</div>"
+module.exports = "<div [@routerTransition]>\n    <!-- <app-page-header [heading]=\"'Tables'\" [icon]=\"'fa-table'\"></app-page-header> -->\n    <div class=\"row\">\n        <h1>Equipment Types</h1>\n            <div class=\"col col-xl-12 col-lg-12\">\n                    <div class=\"card mb-3\">\n                        <div class=\"card-header\">\n                            Equipment Types\n                        </div>\n                        <div class=\"card-body table-responsive\">\n                            <table class=\"table\">\n                                <thead>\n                                <tr>\n                                    <th>#</th>\n                                    <th>Type Name</th>\n                                </tr>\n                                </thead>\n                                <tbody>\n                                <tr *ngFor=\"let type of equipmentTypes; let i= index\" >\n                                    <th scope=\"row\">{{i+1}}</th>\n                                    <td>{{type.typeName}}</td>\n                                 \n                                </tr>\n                                \n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                    \n                </div>\n    </div>\n\n</div>"
 
 /***/ }),
 
@@ -78,6 +78,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EquipmentTypesComponent", function() { return EquipmentTypesComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _router_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../router.animations */ "./src/app/router.animations.ts");
+/* harmony import */ var _shared_services_api_agent_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/services/api-agent.service */ "./src/app/shared/services/api-agent.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -89,18 +91,33 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var EquipmentTypesComponent = /** @class */ (function () {
-    function EquipmentTypesComponent() {
+    function EquipmentTypesComponent(api, router) {
+        this.api = api;
+        this.router = router;
+        this.equipmentTypes = [];
+        this.equipCount = [];
     }
-    EquipmentTypesComponent.prototype.ngOnInit = function () { };
+    EquipmentTypesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.api.getData('/getAllEquipmentTypes').then(function (res) {
+            if (res['status'] == 1) {
+                _this.equipmentTypes = res['message'];
+            }
+        });
+    };
     EquipmentTypesComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-equipment-types',
             template: __webpack_require__(/*! ./equipment-types.component.html */ "./src/app/layout/equipment-types/equipment-types.component.html"),
             styles: [__webpack_require__(/*! ./equipment-types.component.scss */ "./src/app/layout/equipment-types/equipment-types.component.scss")],
-            animations: [Object(_router_animations__WEBPACK_IMPORTED_MODULE_1__["routerTransition"])()]
+            animations: [Object(_router_animations__WEBPACK_IMPORTED_MODULE_1__["routerTransition"])()],
+            providers: [_shared_services_api_agent_service__WEBPACK_IMPORTED_MODULE_2__["ApiAgentService"]]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_shared_services_api_agent_service__WEBPACK_IMPORTED_MODULE_2__["ApiAgentService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], EquipmentTypesComponent);
     return EquipmentTypesComponent;
 }());

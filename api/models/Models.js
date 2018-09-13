@@ -30,11 +30,14 @@ EquipmentTypeSchema = new Schema({
         required: true
     }
 })
+const EquipmentType = mongoose.model('EquipmentType',EquipmentTypeSchema);
+
 
 EquipmentSchema = new Schema({
     typeId:{
         type:Schema.Types.ObjectId,
-        required:true
+        required:true,
+        ref:'EquipmentType',
     },
     name:{
         type:String,
@@ -58,17 +61,38 @@ OfficeSchema = new Schema({
     },
     managerId:{
         type:Schema.Types.ObjectId,
-        required:false
+        required:false,
+        ref: 'User'
     }
 })
 
+AllocationSchema = new Schema({
+    equipmentId:{
+        type:Schema.Types.ObjectId,
+        required:true,
+        rer: 'Equipment'
+    },
+    officeId:{
+        type:Schema.Types.ObjectId,
+        required:true,
+        rer: 'Office'
+    },
+    allocation_time:{
+        type:Date,
+        required:true,
+        default:Date.now()
+    }
 
-const EquipmentType = mongoose.model('EquipmentType',EquipmentTypeSchema);
+})
+
+
 const Equipment = mongoose.model('Equipment',EquipmentSchema);
 const User = mongoose.model('User',UserSchema);
 const Office = mongoose.model('Office',OfficeSchema);
+const Allocation = mongoose.model('Allocation',AllocationSchema);
 
 module.exports.User = User;
 module.exports.EquipmentType = EquipmentType;
 module.exports.Equipment = Equipment;
 module.exports.Office = Office;
+module.exports.Allocation = Allocation;

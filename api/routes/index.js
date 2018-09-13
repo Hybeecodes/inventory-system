@@ -6,6 +6,7 @@ const User = require('../models/Models').User;
 const Equipment = require('../models/Models').Equipment;
 const EquipmentType = require('../models/Models').EquipmentType;
 const Office = require('../models/Models').Office;
+const Allocation = require('../models/Models').Allocation
 
 // passport middlewares
 const passport =  require('../passport').passport;
@@ -13,24 +14,9 @@ const opts = require('../passport').opts;
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-// const opts = {}
-// opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
-// opts.secretOrKey = 'SECRET_KEY'; //normally store this in process.env.secret
 
 const options = {};
 
-// passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-//     console.log(jwt_payload.email);
-//     if (jwt_payload.email === "nacoss@gmail.com") {
-//         return done(null, true)
-//     }
-//     return done(null, false)
-// }));
-
-// opts.jwtFromRequest = ExtractJwt.fromUrlQueryParameter('token');
-// opts.secretOrKey = 'secret';
-// opts.issuer = 'accounts.examplesoft.com';
-// opts.audience = 'yoursite.net';
 
 router.post('/login',(req,res,next)=>{
     let { email, password } = req.body;
@@ -68,6 +54,18 @@ router.post('/addUser',(req,res)=>{
     })
 })
 
+// get all managers
+router.get('/managers',(req,res)=>{
+    User.find({role:2},(err,manager)=>{
+        if(err){
+            res.status(500).json({status:0,mesage:err});
+        }
+        if(manager){
+            res.status(200).json({status:1,message:manager});
+        }
+    })
+})
+
 // CRUD endpoints for equipments
 router.post('/equipment',(req,res,next)=>{
     const newEquipment = {
@@ -78,6 +76,7 @@ router.post('/equipment',(req,res,next)=>{
     Equipment.create(newEquipment).then((equipment)=>{
         res.status(201).json({status:1,message:equipment});
     }).catch((err)=>{
+        // console.err;
         res.status(500).json({status:0,mesage:err});
     })
 })
@@ -145,11 +144,35 @@ router.get('/getAllEquipmentTypes',(req,res,next)=>{
         if(err){
             res.status(500).json({status:0,message:"Sorry, error fetching data"});
         }
-        if(equipments){
+        if(equipment_types){
             res.status(200).json({status:1,message:equipment_types});
         }
     });
 });
+
+router.get('/getTypeEquipments',(req,res)=>{
+    const typeId = req.query.typeId;
+    Equipment.find({typeId:typeId},(err,equip)=>{
+        if(err){
+            res.status(500).json({status:0,message:err});
+        }
+        if(equip){
+            res.status(200).json({status:1,message:equip});
+        }
+    })
+})
+
+router.get('/getTypeEquipmentCount',(req,res)=>{
+    const typeId = req.query.typeId;
+    Equipment.count({typeId:typeId},(err,equip)=>{
+        if(err){
+            res.status(500).json({status:0,message:err});
+        }
+        if(equip){
+            res.status(200).json({status:1,message:equip});
+        }
+    })
+})
 
 router.get('/equipmentTypeCount',(req,res)=>{
     EquipmentType.count({},(err,equip)=>{
@@ -185,9 +208,10 @@ router.delete('/deleteEquipment',(req,res,next)=>{
 
 // CRUD endpoints for office
 
-router.post('/addOffice',(req,res,next)=>{
+router.post('/office',(req,res,next)=>{
     const newOffice = {
-        name: req.body.name
+        name: req.body.name,
+        managerId: req.body.managerId
     };
     Office.create(newOffice).then((office)=>{
         res.status(201).json({status:1,message:office});
@@ -206,8 +230,8 @@ router.get('/officeCount',(req,res)=>{
     })
 });
 
-router.get('/getAllOffices',(req,res,next)=>{
-    Office.find({},{}).exec((err,offices)=>{
+router.get('/offices',(req,res,next)=>{
+    Office.find({},{}).populate('managerId','firstname').exec((err,offices)=>{
         if(err){
             res.status(500).json({status:0,message:err});
         }
@@ -238,5 +262,18 @@ router.delete('/deleteOffice',(req,res,next)=>{
         res.status(500).json({status:0,message:err});
     });
 });
+
+router.post('/allocateEquipment',(req,res)=>{
+    const equimentId = req.body.equimentId;
+    const officeId = req.body.officeId;
+    Allocation.create({equimentId:equimentId,officeId:officeId},(err,result)=>{
+        if(err){
+            res.status(500).json({status:0,message:err});
+        }else{
+            res.status(201).json({status:1,message:result});
+        }
+    })
+})
+
 
 module.exports = router;

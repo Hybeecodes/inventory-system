@@ -17,6 +17,11 @@ var map = {
 		"common",
 		"add-equipment-type-add-equipment-type-module"
 	],
+	"./add-equipment/add-equipment.module": [
+		"./src/app/layout/add-equipment/add-equipment.module.ts",
+		"common",
+		"add-equipment-add-equipment-module"
+	],
 	"./blank-page/blank-page.module": [
 		"./src/app/layout/blank-page/blank-page.module.ts",
 		"blank-page-blank-page-module"
@@ -48,6 +53,11 @@ var map = {
 		"common",
 		"equipment-types-equipment-types-module"
 	],
+	"./equipments/equipments.module": [
+		"./src/app/layout/equipments/equipments.module.ts",
+		"common",
+		"equipments-equipments-module"
+	],
 	"./form/form.module": [
 		"./src/app/layout/form/form.module.ts",
 		"common",
@@ -72,6 +82,11 @@ var map = {
 	"./not-found/not-found.module": [
 		"./src/app/not-found/not-found.module.ts",
 		"not-found-not-found-module"
+	],
+	"./offices/offices.module": [
+		"./src/app/layout/offices/offices.module.ts",
+		"common",
+		"offices-offices-module"
 	],
 	"./server-error/server-error.module": [
 		"./src/app/server-error/server-error.module.ts",

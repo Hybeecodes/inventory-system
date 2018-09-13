@@ -6,14 +6,14 @@ import { Router } from '@angular/router';
 
 
 @Component({
-    selector: 'app-equipment-types',
-    templateUrl: './equipment-types.component.html',
-    styleUrls: ['./equipment-types.component.scss'],
+    selector: 'app-offices',
+    templateUrl: './offices.component.html',
+    styleUrls: ['./offices.component.scss'],
     animations:[routerTransition()],
     providers:[ApiAgentService]
 })
-export class EquipmentTypesComponent implements OnInit {
-    equipmentTypes = [];
+export class OfficesComponent implements OnInit {
+    offices = [];
     equipCount = [];
     constructor(
         public api:ApiAgentService,
@@ -22,9 +22,10 @@ export class EquipmentTypesComponent implements OnInit {
 
     ngOnInit(
     ) {
-        this.api.getData('/getAllEquipmentTypes').then((res)=>{
+        this.api.getData('/offices').then((res)=>{
             if(res['status'] ==1){
-                this.equipmentTypes = res['message'];
+                console.log(res);
+                this.offices = res['message'];
             }
         })
        

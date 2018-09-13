@@ -12,34 +12,38 @@
             <i class="fa fa-fw fa-table"></i>&nbsp;
             <span>{{ 'Add Equipment Type' | translate }}</span>
         </a>
-        <a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/equipments']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-edit"></i>&nbsp;
             <span>{{ 'Equipments' | translate }}</span>
         </a>
-        <a [routerLink]="['/bs-element']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/add_equipment']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-desktop"></i>&nbsp;
             <span>{{ 'Add Equipment' | translate }}</span>
         </a>
-        <a [routerLink]="['/grid']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/offices']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-wrench"></i>&nbsp;
             <span>{{ 'Offices' | translate }}</span>
         </a>
-        <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/add_office']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;
             <span>{{ 'Add Office' | translate }}</span>
         </a>
-        <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/managers']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;
             <span>{{ 'Managers' | translate }}</span>
         </a>
-        <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/add_manager']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;
             <span>{{ 'Add Manager' | translate }}</span>
         </a>
-        <div class="nested-menu">
+        <a [routerLink]="['/allocations']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-th-list"></i>&nbsp;
+            <span>{{ 'Equipment Allocations' | translate }}</span>
+        </a>
+        <!-- <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <i class="fa fa-plus"></i>&nbsp;
-                <span>{{ 'Menu' | translate }}</span>
+                <span>{{ 'Equipment Allocations' | translate }}</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
@@ -63,11 +67,11 @@
                     </li>
                 </ul>
             </li>
-        </div>
-        <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        </div> -->
+        <!-- <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;
             <span>{{ 'Blank Page' | translate }}</span>
-        </a>
+        </a> -->
 
     </div>
     <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">

@@ -1,25 +1,26 @@
 <div [@routerTransition]>
     <!-- <app-page-header [heading]="'Tables'" [icon]="'fa-table'"></app-page-header> -->
     <div class="row">
-        <h1>Equipment Types</h1>
+        <h1>Offices</h1>
             <div class="col col-xl-12 col-lg-12">
                     <div class="card mb-3">
                         <div class="card-header">
-                            Equipment Types
+                            Offices
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Type Name</th>
+                                    <th>Equipment Name</th>
+                                    <th>Manager</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let type of equipmentTypes; let i= index" >
+                                <tr *ngFor="let office of offices; let i= index" >
                                     <th scope="row">{{i+1}}</th>
-                                    <td>{{type.typeName}}</td>
-                                 
+                                    <td>{{office.name}}</td>
+                                    <!-- <td>{{type.condition}}</td> -->
                                 </tr>
                                 
                                 </tbody>
