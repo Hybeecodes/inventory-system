@@ -70,7 +70,7 @@ router.get('/managers',(req,res)=>{
 router.post('/equipment',(req,res,next)=>{
     const newEquipment = {
         typeId: req.body.typeId,
-        name: req.body.equipmentName,
+        name: req.body.name,
         condition: req.body.condition
     };
     Equipment.create(newEquipment).then((equipment)=>{
