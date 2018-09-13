@@ -717,7 +717,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    API_ROOT: 'http://localhost:4000/api'
+    API_ROOT: 'https://nacoss-inventory-system.herokuapp.com/api'
 };
 
 
