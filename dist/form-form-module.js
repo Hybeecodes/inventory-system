@@ -50,7 +50,7 @@ var FormRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [@routerTransition]>\n    <!-- <app-page-header [heading]=\"'Forms'\" [icon]=\"'fa-edit'\"></app-page-header> -->\n\n    <div class=\"row\">\n        <h1>Add New Office</h1>  \n        <div class=\"col-lg-12\">\n            <form>\n                <fieldset class=\"form-group\">\n                    <label>Office Name</label>\n                    <input class=\"form-control\" name=\"name\" #name placeholder=\"Office Name\">\n                </fieldset>\n                <fieldset class=\"form-group\">\n                    <label>Equipment Type</label>\n                    <select name=\"type\" #manager class=\"form-control\" >\n                        <option *ngFor=\"let manager of managers\" value=\"{{manager._id}}\">{{manager.firstname}} {{manager.firstname}}</option>\n                        \n                    </select>\n                </fieldset>\n                \n                <a class=\"btn btn-secondary\" (click)=\"addOffice(name.value,manager.value)\" >Add Equipment</a>\n\n            </form>\n\n        </div>\n    </div>\n    <!-- /.row -->\n</div>\n"
+module.exports = "<div [@routerTransition]>\n    <!-- <app-page-header [heading]=\"'Forms'\" [icon]=\"'fa-edit'\"></app-page-header> -->\n\n    <div class=\"row\">\n        <h1>Add New Office</h1>  \n        <div class=\"col-lg-12\">\n            <form>\n                <fieldset class=\"form-group\">\n                    <label>Office Name</label>\n                    <input class=\"form-control\" name=\"name\" #name placeholder=\"Office Name\">\n                </fieldset>\n                <fieldset class=\"form-group\">\n                    <label>Manager</label>\n                    <input class=\"form-control\" name=\"manager\" #manager placeholder=\"Manager Name\">\n                </fieldset>\n                \n                <a class=\"btn btn-secondary\" (click)=\"addOffice(name.value,manager.value)\" >Add office</a>\n\n            </form>\n\n        </div>\n    </div>\n    <!-- /.row -->\n</div>\n"
 
 /***/ }),
 
@@ -113,7 +113,7 @@ var FormComponent = /** @class */ (function () {
     FormComponent.prototype.addOffice = function (name, manager) {
         var _this = this;
         console.log(name);
-        this.api.postData({ name: name, managerId: manager }, '/office').then(function (res) {
+        this.api.postData({ name: name, manager: manager }, '/office').then(function (res) {
             if (res['status'] == 1) {
                 _this.router.navigateByUrl('offices');
             }

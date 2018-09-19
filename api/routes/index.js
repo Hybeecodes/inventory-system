@@ -67,17 +67,26 @@ router.get('/managers',(req,res)=>{
 
 // CRUD endpoints for equipments
 router.post('/equipment',(req,res,next)=>{
-    const newEquipment = {
-        typeId: req.body.typeId,
-        name: req.body.name,
-        condition: req.body.condition
-    };
-    Equipment.create(newEquipment).then((equipment)=>{
-        res.status(201).json({status:1,message:equipment});
-    }).catch((err)=>{
-        // console.err;
-        res.status(500).json({status:0,mesage:err});
+    const typeId = req.body.typeId;
+    EquipmentType.findById(typeId,(err,type)=>{
+        if(err)
+            throw err;
+        else{
+            const newEquipment = {
+                typeId: req.body.typeId,
+                typeName: type.typeName,
+                name: req.body.name,
+                condition: req.body.condition
+            };
+            Equipment.create(newEquipment).then((equipment)=>{
+                res.status(201).json({status:1,message:equipment});
+            }).catch((err)=>{
+                // console.err;
+                res.status(500).json({status:0,mesage:err});
+        })
+    }
     })
+   
 })
 
 router.get('/equipmentCount',(req,res)=>{
@@ -91,7 +100,7 @@ router.get('/equipmentCount',(req,res)=>{
 });
 
 router.get('/equipments',(req,res,next)=>{
-    Equipment.find({},{}).populate('typeId','typeName',EquipmentType).populate('allocatedTo','name',Office).exec((err,equipments)=>{
+    Equipment.find({},{}).populate('allocatedTo','name',Office).exec((err,equipments)=>{
         if(err){
             res.status(500).json({status:0,message:"Sorry, error fetching data"});
         }
@@ -222,7 +231,7 @@ router.delete('/deleteEquipment',(req,res,next)=>{
 router.post('/office',(req,res,next)=>{
     const newOffice = {
         name: req.body.name,
-        managerId: req.body.managerId
+        manager: req.body.manager
     };
     console.log(newOffice);
     Office.create(newOffice).then((office)=>{

@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
 
     addOffice(name,manager){
         console.log(name);
-        this.api.postData({name:name,managerId:manager},'/office').then((res)=>{
+        this.api.postData({name:name,manager:manager},'/office').then((res)=>{
             if(res['status'] == 1){
                 this.router.navigateByUrl('offices');
             }else{

@@ -39,6 +39,10 @@ EquipmentSchema = new Schema({
         required:true,
         ref:'EquipmentType',
     },
+    typeName:{
+        type:String,
+        required:true
+    },
     name:{
         type:String,
         required:true
@@ -65,10 +69,9 @@ OfficeSchema = new Schema({
         type:String,
         required:true
     },
-    managerId:{
-        type:Schema.Types.ObjectId,
-        required:false,
-        ref: 'User'
+    manager:{
+        type:String,
+        required:true,
     }
 })
 

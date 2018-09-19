@@ -10,14 +10,11 @@
                     <input class="form-control" name="name" #name placeholder="Office Name">
                 </fieldset>
                 <fieldset class="form-group">
-                    <label>Equipment Type</label>
-                    <select name="type" #manager class="form-control" >
-                        <option *ngFor="let manager of managers" value="{{manager._id}}">{{manager.firstname}} {{manager.firstname}}</option>
-                        
-                    </select>
+                    <label>Manager</label>
+                    <input class="form-control" name="manager" #manager placeholder="Manager Name">
                 </fieldset>
                 
-                <a class="btn btn-secondary" (click)="addOffice(name.value,manager.value)" >Add Equipment</a>
+                <a class="btn btn-secondary" (click)="addOffice(name.value,manager.value)" >Add office</a>
 
             </form>
 
