@@ -543,11 +543,11 @@ var ApiAgentService = /** @class */ (function () {
         };
     }
     ApiAgentService.prototype.postData = function (post_data, endpoint) {
-        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].local_api + endpoint;
+        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_ROOT + endpoint;
         return this.http.post(url, post_data).toPromise();
     };
     ApiAgentService.prototype.getData = function (endpoint) {
-        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].local_api + endpoint;
+        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_ROOT + endpoint;
         return this.http.get(url).toPromise();
     };
     ApiAgentService = __decorate([

@@ -48,6 +48,8 @@ export class LoginComponent implements OnInit {
                 this.classname = 'alert alert-danger';
                 this.alert = res['message'];
             }
-        });
+        }).catch((err)=>{
+            console.log(err);
+        })
     };
 }

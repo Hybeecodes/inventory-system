@@ -703,9 +703,8 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
-    production: false,
-    API_ROOT: 'https://nacoss-inventory-system.herokuapp.com/api',
-    local_api: 'http://localhost:4000/api'
+    production: true,
+    API_ROOT: '/api'
 };
 
 
