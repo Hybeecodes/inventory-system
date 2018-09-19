@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
 
     onLoggedin(email,password) {
         this.submitted = true;
-        console.log(email);
         let post_data = {
             email:email,
             password: password
