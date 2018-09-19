@@ -15,10 +15,9 @@ const routes: Routes = [
             { path: 'equipments', loadChildren: './equipments/equipments.module#EquipmentsModule' },
             { path: 'add_equipment', loadChildren: './add-equipment/add-equipment.module#AddEquipmentModule' },
             { path: 'offices', loadChildren: './offices/offices.module#OfficesModule' },
-            // { path: 'add_office', loadChildren: './add-office/add-office.module#AddOfficeModule' },
             { path: 'allocations', loadChildren: './tables/tables.module#TablesModule' },
             { path: 'add_office', loadChildren: './form/form.module#FormModule' },
-            { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
+            { path: 'allocate_equipment/:id', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' }
@@ -27,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+    imports: [RouterModule.forChild(routes,)],
     exports: [RouterModule]
 })
 export class LayoutRoutingModule {}

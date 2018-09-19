@@ -1,11 +1,11 @@
 <div [@routerTransition]>
     <!-- <app-page-header [heading]="'Tables'" [icon]="'fa-table'"></app-page-header> -->
     <div class="row">
-        <h1>Equipment Types</h1>
+        <h1>Equipments</h1>
             <div class="col col-xl-12 col-lg-12">
                     <div class="card mb-3">
                         <div class="card-header">
-                            Equipment Types
+                            Equipments
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table">
@@ -15,14 +15,28 @@
                                     <th>Equipment Name</th>
                                     <th>Type</th>
                                     <th>Condition</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let type of equipments; let i= index" >
                                     <th scope="row">{{i+1}}</th>
                                     <td>{{type.name}}</td>
-                                    <td>{{type.typeId.name}}</td>
+                                    <td>{{type.typeId.typeName}}</td>
                                     <td>{{type.condition}}</td>
+                                      <td>
+                                        <span *ngIf="type.isAllocated" style="cursor:pointer;" (click)="showDetails($event,type)" class="badge badge-success">Allocated</span>
+                                      </td>
+                                      <td>
+                                        <span *ngIf="!type.isAllocated" class="badge badge-danger">Not Allocated</span>
+                                      </td>
+                                    <td> 
+                                        <a routerLink="/allocate_equipment/{{type._id}}" *ngIf="!type.isAllocated" class="btn btn-danger">Allocate</a>    
+                                    </td>
+                                    <td> 
+                                        <button type="button" class="btn btn-primary" *ngIf="type.isAllocated" (click)="deallocate($event,type)" >Deallocate</button>   
+                                    </td>
+                                    
                                 </tr>
                                 
                                 </tbody>

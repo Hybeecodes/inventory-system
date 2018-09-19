@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  API_ROOT: 'https://nacoss-inventory-system.herokuapp.com/api'
+  API_ROOT: 'https://nacoss-inventory-system.herokuapp.com/api',
+  local_api: 'http://localhost:4000/api'
 };

@@ -14,12 +14,10 @@ var map = {
 	],
 	"./add-equipment-type/add-equipment-type.module": [
 		"./src/app/layout/add-equipment-type/add-equipment-type.module.ts",
-		"common",
 		"add-equipment-type-add-equipment-type-module"
 	],
 	"./add-equipment/add-equipment.module": [
 		"./src/app/layout/add-equipment/add-equipment.module.ts",
-		"common",
 		"add-equipment-add-equipment-module"
 	],
 	"./blank-page/blank-page.module": [
@@ -29,54 +27,46 @@ var map = {
 	"./bs-component/bs-component.module": [
 		"./src/app/layout/bs-component/bs-component.module.ts",
 		"bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module",
-		"common",
 		"bs-component-bs-component-module"
 	],
 	"./bs-element/bs-element.module": [
 		"./src/app/layout/bs-element/bs-element.module.ts",
-		"common",
+		"bs-element-bs-element-module~equipments-equipments-module",
 		"bs-element-bs-element-module"
 	],
 	"./charts/charts.module": [
 		"./src/app/layout/charts/charts.module.ts",
-		"common",
 		"charts-charts-module"
 	],
 	"./dashboard/dashboard.module": [
 		"./src/app/layout/dashboard/dashboard.module.ts",
 		"bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module",
-		"common",
 		"dashboard-dashboard-module"
 	],
 	"./equipment-types/equipment-types.module": [
 		"./src/app/layout/equipment-types/equipment-types.module.ts",
-		"common",
 		"equipment-types-equipment-types-module"
 	],
 	"./equipments/equipments.module": [
 		"./src/app/layout/equipments/equipments.module.ts",
-		"common",
+		"bs-element-bs-element-module~equipments-equipments-module",
 		"equipments-equipments-module"
 	],
 	"./form/form.module": [
 		"./src/app/layout/form/form.module.ts",
-		"common",
 		"form-form-module"
 	],
 	"./grid/grid.module": [
 		"./src/app/layout/grid/grid.module.ts",
-		"common",
 		"grid-grid-module"
 	],
 	"./layout/layout.module": [
 		"./src/app/layout/layout.module.ts",
 		"bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module",
-		"common",
 		"layout-layout-module"
 	],
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
-		"common",
 		"login-login-module"
 	],
 	"./not-found/not-found.module": [
@@ -85,7 +75,6 @@ var map = {
 	],
 	"./offices/offices.module": [
 		"./src/app/layout/offices/offices.module.ts",
-		"common",
 		"offices-offices-module"
 	],
 	"./server-error/server-error.module": [
@@ -94,12 +83,10 @@ var map = {
 	],
 	"./signup/signup.module": [
 		"./src/app/signup/signup.module.ts",
-		"common",
 		"signup-signup-module"
 	],
 	"./tables/tables.module": [
 		"./src/app/layout/tables/tables.module.ts",
-		"common",
 		"tables-tables-module"
 	]
 };
@@ -161,7 +148,7 @@ var AppRoutingModule = /** @class */ (function () {
     }
     AppRoutingModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
+            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, { onSameUrlNavigation: 'reload' })],
             exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
         })
     ], AppRoutingModule);
@@ -717,7 +704,8 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    API_ROOT: 'https://nacoss-inventory-system.herokuapp.com/api'
+    API_ROOT: 'https://nacoss-inventory-system.herokuapp.com/api',
+    local_api: 'http://localhost:4000/api'
 };
 
 

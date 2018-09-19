@@ -48,9 +48,15 @@ EquipmentSchema = new Schema({
         enum:['good','bad'],
         required:true
     },
+    isAllocated:{
+        type:Boolean,
+        required:true,
+        default: false
+    },
     allocatedTo:{
         type:Schema.Types.ObjectId,
-        required:false
+        required:false,
+        ref: 'Office'
     }
 })
 

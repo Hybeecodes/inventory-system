@@ -51,7 +51,7 @@ var EquipmentsRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [@routerTransition]>\n    <!-- <app-page-header [heading]=\"'Tables'\" [icon]=\"'fa-table'\"></app-page-header> -->\n    <div class=\"row\">\n        <h1>Equipment Types</h1>\n            <div class=\"col col-xl-12 col-lg-12\">\n                    <div class=\"card mb-3\">\n                        <div class=\"card-header\">\n                            Equipment Types\n                        </div>\n                        <div class=\"card-body table-responsive\">\n                            <table class=\"table\">\n                                <thead>\n                                <tr>\n                                    <th>#</th>\n                                    <th>Equipment Name</th>\n                                    <th>Type</th>\n                                    <th>Condition</th>\n                                </tr>\n                                </thead>\n                                <tbody>\n                                <tr *ngFor=\"let type of equipments; let i= index\" >\n                                    <th scope=\"row\">{{i+1}}</th>\n                                    <td>{{type.name}}</td>\n                                    <td>{{type.typeId.name}}</td>\n                                    <td>{{type.condition}}</td>\n                                </tr>\n                                \n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                    \n                </div>\n    </div>\n\n</div>"
+module.exports = "<div [@routerTransition]>\n    <!-- <app-page-header [heading]=\"'Tables'\" [icon]=\"'fa-table'\"></app-page-header> -->\n    <div class=\"row\">\n        <h1>Equipments</h1>\n            <div class=\"col col-xl-12 col-lg-12\">\n                    <div class=\"card mb-3\">\n                        <div class=\"card-header\">\n                            Equipments\n                        </div>\n                        <div class=\"card-body table-responsive\">\n                            <table class=\"table\">\n                                <thead>\n                                <tr>\n                                    <th>#</th>\n                                    <th>Equipment Name</th>\n                                    <th>Type</th>\n                                    <th>Condition</th>\n                                    <th>Status</th>\n                                </tr>\n                                </thead>\n                                <tbody>\n                                <tr *ngFor=\"let type of equipments; let i= index\" >\n                                    <th scope=\"row\">{{i+1}}</th>\n                                    <td>{{type.name}}</td>\n                                    <td>{{type.typeId.typeName}}</td>\n                                    <td>{{type.condition}}</td>\n                                      <td>\n                                        <span *ngIf=\"type.isAllocated\" style=\"cursor:pointer;\" (click)=\"showDetails($event,type)\" class=\"badge badge-success\">Allocated</span>\n                                      </td>\n                                      <td>\n                                        <span *ngIf=\"!type.isAllocated\" class=\"badge badge-danger\">Not Allocated</span>\n                                      </td>\n                                    <td> \n                                        <a routerLink=\"/allocate_equipment/{{type._id}}\" class=\"btn btn-danger\">Allocate</a>    \n                                    </td>\n                                    <td> \n                                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deallocate($event,type)\" >Deallocate</button>   \n                                    </td>\n                                    \n                                </tr>\n                                \n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                    \n                </div>\n    </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -80,6 +80,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../router.animations */ "./src/app/router.animations.ts");
 /* harmony import */ var _shared_services_api_agent_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/services/api-agent.service */ "./src/app/shared/services/api-agent.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -89,6 +91,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -106,6 +109,19 @@ var EquipmentsComponent = /** @class */ (function () {
             if (res['status'] == 1) {
                 console.log(res);
                 _this.equipments = res['message'];
+            }
+        });
+    };
+    EquipmentsComponent.prototype.showDetails = function (e, item) {
+        sweetalert__WEBPACK_IMPORTED_MODULE_4___default()("\n            Equipment Name: " + item.name + "\n            Allocated To : " + item.allocatedTo.name + "\n        ");
+    };
+    EquipmentsComponent.prototype.deallocate = function (e, item) {
+        var equipmentId = item._id;
+        this.api.getData("/deallocate/" + equipmentId).then(function (res) {
+            if (res['status'] == 1) {
+                sweetalert__WEBPACK_IMPORTED_MODULE_4___default()('Great!', 'Equipment Deallocated Successfully', 'success').then(function () {
+                    location.reload(true);
+                });
             }
         });
     };

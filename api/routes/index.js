@@ -17,7 +17,6 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const options = {};
 
-
 router.post('/login',(req,res,next)=>{
     let { email, password } = req.body;
     console.log(req.body);
@@ -92,7 +91,7 @@ router.get('/equipmentCount',(req,res)=>{
 });
 
 router.get('/equipments',(req,res,next)=>{
-    Equipment.find({},{}).populate('typeId','typeName',EquipmentType).exec((err,equipments)=>{
+    Equipment.find({},{}).populate('typeId','typeName',EquipmentType).populate('allocatedTo','name',Office).exec((err,equipments)=>{
         if(err){
             res.status(500).json({status:0,message:"Sorry, error fetching data"});
         }
@@ -101,6 +100,18 @@ router.get('/equipments',(req,res,next)=>{
         }
     });
 });
+
+router.get('/equipment/:id',(req,res)=>{
+    const id = req.params.id;
+    Equipment.findById(id).populate('typeId','typeName',EquipmentType).exec((err,equipments)=>{
+        if(err){
+            res.status(500).json({status:0,message:"Sorry, error fetching data"});
+        }
+        if(equipments){
+            res.status(200).json({status:1,message:equipments});
+        }
+    });
+})
 
 router.put('/updateEquipment',(req,res,next)=>{
     const typeId = req.body.typeId;
@@ -282,6 +293,36 @@ router.get('/allocations',(req,res)=>{
             res.status(500).json({status:0,message:err});
         }else{
             res.status(200).json({status:1,message:allocations});
+        }
+    })
+})
+
+router.post('/allocate',(req,res)=>{
+    const equipmentId = req.body.equipmentId;
+    const officeId = req.body.officeId;
+    Equipment.findByIdAndUpdate(equipmentId,{$set:{allocatedTo:officeId,isAllocated:true}},(err,equip)=>{
+        if(err){
+            throw err;
+        }else{
+            // create new allocation history
+            Allocation.create({equipmentId:equipmentId,officeId:officeId},(err,result)=>{
+                if(err){
+                    res.status(500).json({status:0,message:err});
+                }else{
+                    res.status(201).json({status:1,message:result});
+                }
+            })
+        }
+    })
+});
+
+router.get('/deallocate/:id',(req,res)=>{
+    const equimentId = req.params.id;
+    Equipment.findByIdAndUpdate(equimentId,{$set:{allocatedTo:null,isAllocated:false}},(err,equip)=>{
+        if(err){
+            throw err;
+        }else{
+            res.status(201).json({status:1,message:equip});
         }
     })
 })
