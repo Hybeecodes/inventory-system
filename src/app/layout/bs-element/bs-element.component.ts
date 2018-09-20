@@ -44,9 +44,9 @@ export class BsElementComponent implements OnInit {
         })
     }
 
-    allocateEquipment(officeId){
+    allocateEquipment(officeId,givenTo){
         const equipmentId = this.equipment._id;
-        this.api.postData({equipmentId:equipmentId,officeId:officeId},'/allocate').then((res)=>{
+        this.api.postData({equipmentId:equipmentId,officeId:officeId,collectedBy:givenTo},'/allocate').then((res)=>{
             if(res['status'] == 1){
                 swal('Great!','Equipment Allocated Successfully','success').then(()=>{
                     this.router.navigateByUrl('/equipments')

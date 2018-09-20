@@ -13,7 +13,11 @@
                         
                     </select>
                 </fieldset>
-                <a class="btn btn-primary" (click)="allocateEquipment(office.value)" >Allocate Equipment</a>
+                <fieldset class="form-group">
+                    <label>Given To </label>
+                    <input type="text" name="" class="form-control" #givenTo placeholder="Given To" id="">
+                </fieldset>
+                <a class="btn btn-primary" (click)="allocateEquipment(office.value,givenTo.value)" >Allocate Equipment</a>
 
             </form>
 

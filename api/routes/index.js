@@ -14,6 +14,7 @@ const opts = require('../passport').opts;
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+const fs = require('fs');
 
 const options = {};
 
@@ -297,7 +298,7 @@ router.post('/allocateEquipment',(req,res)=>{
 })
 
 router.get('/allocations',(req,res)=>{
-    Allocation.find({},{}).populate('equipmentId','name',Equipment).populate('officeId','name',Office).exec((err,allocations)=>{
+    Allocation.find({},{}).populate('equipmentId',['name','typeName'],Equipment).populate('officeId',['name','manager'],Office).exec((err,allocations)=>{
         if(err){
             res.status(500).json({status:0,message:err});
         }else{
@@ -309,12 +310,13 @@ router.get('/allocations',(req,res)=>{
 router.post('/allocate',(req,res)=>{
     const equipmentId = req.body.equipmentId;
     const officeId = req.body.officeId;
-    Equipment.findByIdAndUpdate(equipmentId,{$set:{allocatedTo:officeId,isAllocated:true}},(err,equip)=>{
+    const collectedBy = req.body.collectedBy;
+    Equipment.findByIdAndUpdate(equipmentId,{$set:{allocatedTo:officeId,isAllocated:true,givenTo:collectedBy}},(err,equip)=>{
         if(err){
             throw err;
         }else{
             // create new allocation history
-            Allocation.create({equipmentId:equipmentId,officeId:officeId},(err,result)=>{
+            Allocation.create({equipmentId:equipmentId,officeId:officeId,collectedBy:collectedBy},(err,result)=>{
                 if(err){
                     res.status(500).json({status:0,message:err});
                 }else{
@@ -335,6 +337,8 @@ router.get('/deallocate/:id',(req,res)=>{
         }
     })
 })
+
+
 
 
 module.exports = router;

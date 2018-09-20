@@ -34,6 +34,7 @@ export class EquipmentsComponent implements OnInit {
         swal(`
             Equipment Name: ${item.name}
             Allocated To : ${item.allocatedTo.name}
+            Collected By : ${item.givenTo}
         `);
     }
     deallocate(e,item){

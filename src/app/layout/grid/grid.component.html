@@ -1,266 +1,76 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Bootstrap Grid'" [icon]="'fa-wrench'"></app-page-header>
-
-    <div class="row">
-        <div class="col-xl-12 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-12
-                </div>
+    <!-- <app-page-header [heading]="'Tables'" [icon]="'fa-table'"></app-page-header> -->
+    <div class="row" id="report" #report>
+        <h1>Equipment Report</h1>
+            <div class="col col-xl-12 col-lg-12">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Equipments
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Equipment Name</th>
+                                    <th>Type</th>
+                                    <th>Condition</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let equipment of equipments; let i= index" >
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{equipment.name}}</td>
+                                    <td>{{equipment.typeName}}</td>
+                                    <td>{{equipment.condition}}</td>
+                                    <td>  </td>
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
             </div>
+
+            <div class="col col-xl-12 col-lg-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Allocation History
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Equipment Name</th>
+                                <th>Type</th>
+                                <th>Office</th>
+                                <th>Office Manager</th>
+                                <th>Collected By</th>
+                                <th>allocation Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let allocation of allocations; let i= index" >
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{allocation.equipmentId.name}}</td>
+                                <td>{{allocation.equipmentId.typeName}}</td>
+                                <td>{{allocation.officeId.name}}</td>
+                                <td> {{allocation.officeId.manager}} </td>
+                                <td> {{ allocation.collectedBy }} </td>
+                                <td>{{allocation.allocation_time | date:"fullDate" }}</td>
+                            </tr>
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
         </div>
     </div>
-    <!-- /.row -->
 
-    <div class="row">
-        <div class="col-xl-6 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-6
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-6 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-6
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <div class="col-xl-4 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-4
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-4
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-4
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <div class="col-xl-3 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-3
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-3
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-3
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-3
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <div class="col-xl-2 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-2
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-2
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-2
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-2
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-2
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-2
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-1
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <div class="col-xl-8 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-8
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-4
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <div class="col-xl-3 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-3
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-6 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-6
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 text-xs-center">
-            <div class="card mb-3">
-                <div class="card-body">
-                    .col-xl-3
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
 </div>
+
+<button class="btn btn-primary" (click)="exportReport()" > Download Report</button>

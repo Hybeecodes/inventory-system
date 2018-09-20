@@ -1,0 +1,31 @@
+
+            Name           Condition    Allocated to        Status   Type
+     
+
+            Hp Projector             good        Office One       Allocated               undefined 
+
+            
+            Hp Projector             good        Office One       Allocated               undefined 
+
+            
+            New             good        Office One       Allocated               undefined 
+
+            
+            hvhkhjfg             good        Office One       Allocated               Projector 
+
+            
+            Name           Condition    Allocated to        Status   Type
+     
+
+            Hp Projector             good        Office One       Allocated               undefined 
+
+            
+            Hp Projector             good        Office One       Allocated               undefined 
+
+            
+            New             good        Office One       Allocated               undefined 
+
+            
+            hvhkhjfg             good        Office One       Allocated               Projector 
+
+            

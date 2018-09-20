@@ -51,7 +51,7 @@ var BsElementRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [@routerTransition]>\n    <!-- <app-page-header [heading]=\"'Forms'\" [icon]=\"'fa-edit'\"></app-page-header> -->\n\n    <div class=\"row\">\n        <h3>Allocate Equipment ({{equipment.name}}) </h3>  \n        <div class=\"col-lg-12\">\n            <form>\n                <h3>Select Office to allocate {{equipment.name}} </h3>\n                <fieldset class=\"form-group\">\n                    <label>Office </label>\n                    <select name=\"type\" #office class=\"form-control\" >\n                        <option *ngFor=\"let office of offices\" value=\"{{office._id}}\">{{office.name}}</option>\n                        \n                    </select>\n                </fieldset>\n                <a class=\"btn btn-primary\" (click)=\"allocateEquipment(office.value)\" >Allocate Equipment</a>\n\n            </form>\n\n        </div>\n    </div>\n    <!-- /.row -->\n</div>\n"
+module.exports = "<div [@routerTransition]>\n    <!-- <app-page-header [heading]=\"'Forms'\" [icon]=\"'fa-edit'\"></app-page-header> -->\n\n    <div class=\"row\">\n        <h3>Allocate Equipment ({{equipment.name}}) </h3>  \n        <div class=\"col-lg-12\">\n            <form>\n                <h3>Select Office to allocate {{equipment.name}} </h3>\n                <fieldset class=\"form-group\">\n                    <label>Office </label>\n                    <select name=\"type\" #office class=\"form-control\" >\n                        <option *ngFor=\"let office of offices\" value=\"{{office._id}}\">{{office.name}}</option>\n                        \n                    </select>\n                </fieldset>\n                <fieldset class=\"form-group\">\n                    <label>Given To </label>\n                    <input type=\"text\" name=\"\" class=\"form-control\" #givenTo placeholder=\"Given To\" id=\"\">\n                </fieldset>\n                <a class=\"btn btn-primary\" (click)=\"allocateEquipment(office.value,givenTo.value)\" >Allocate Equipment</a>\n\n            </form>\n\n        </div>\n    </div>\n    <!-- /.row -->\n</div>\n"
 
 /***/ }),
 
@@ -125,10 +125,10 @@ var BsElementComponent = /** @class */ (function () {
             }
         });
     };
-    BsElementComponent.prototype.allocateEquipment = function (officeId) {
+    BsElementComponent.prototype.allocateEquipment = function (officeId, givenTo) {
         var _this = this;
         var equipmentId = this.equipment._id;
-        this.api.postData({ equipmentId: equipmentId, officeId: officeId }, '/allocate').then(function (res) {
+        this.api.postData({ equipmentId: equipmentId, officeId: officeId, collectedBy: givenTo }, '/allocate').then(function (res) {
             if (res['status'] == 1) {
                 sweetalert__WEBPACK_IMPORTED_MODULE_4___default()('Great!', 'Equipment Allocated Successfully', 'success').then(function () {
                     _this.router.navigateByUrl('/equipments');

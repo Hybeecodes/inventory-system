@@ -29,12 +29,9 @@
                                         <span *ngIf="!type.isAllocated" class="badge badge-danger">Not Allocated</span>
                                       </td>
                                     <td> 
-                                        <a routerLink="/allocate_equipment/{{type._id}}" *ngIf="!type.isAllocated" class="btn btn-success">Allocate</a>    
+                                        <a routerLink="/allocate_equipment/{{type._id}}" *ngIf="!type.isAllocated" class="btn btn-success">Allocate</a> 
+                                        <button type="button" class="btn btn-warning" *ngIf="type.isAllocated" (click)="deallocate($event,type)" >Deallocate</button>      
                                     </td>
-                                    <td> 
-                                        <button type="button" class="btn btn-warning" *ngIf="type.isAllocated" (click)="deallocate($event,type)" >Deallocate</button>   
-                                    </td>
-                                    
                                 </tr>
                                 
                                 </tbody>

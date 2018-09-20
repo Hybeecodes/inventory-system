@@ -61,6 +61,10 @@ EquipmentSchema = new Schema({
         type:Schema.Types.ObjectId,
         required:false,
         ref: 'Office'
+    },
+    givenTo:{
+        type: String,
+        required:false
     }
 })
 
@@ -80,6 +84,10 @@ AllocationSchema = new Schema({
         type:Schema.Types.ObjectId,
         required:true,
         ref: 'Equipment'
+    },
+    collectedBy:{
+        type: String,
+        required: true
     },
     officeId:{
         type:Schema.Types.ObjectId,
